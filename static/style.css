@@ -1,0 +1,99 @@
+/* General Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Upload Page Styling */
+.upload-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.1);
+}
+
+.upload-title {
+    color: #0d6efd;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.custom-file-upload {
+    border: 2px dashed #0d6efd;
+    border-radius: 5px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #eef3fb;
+}
+
+.btn-upload {
+    width: 100%;
+    padding: 0.9rem;
+    font-weight: 600;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-upload:hover {
+    background-color: #0b5ed7;
+}
+
+/* Result Page Styling */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    border: none;
+}
+
+.card-header {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.table-responsive {
+    border-radius: 0 0 15px 15px;
+    background-color: white;
+    padding: 1rem;
+}
+
+.img-container {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.img-container h5 {
+    margin-bottom: 1rem;
+    color: #0d6efd;
+}
+
+.btn-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border: none;
+}

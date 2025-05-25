@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasil Clustering</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    .table-wrapper {
+      max-height: 350px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+    .card-header h4 {
+      font-weight: 600;
+    }
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #0d6efd;
+    }
+    .img-card {
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      background-color: white;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    .img-card img {
+      max-height: 250px;
+      object-fit: contain;
+    }
+    .toggle-btn {
+      font-size: 0.85rem;
+      padding: 0.25rem 0.75rem;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-center section-title">📊 Hasil Clustering Data Pelanggan</h2>
+
+    <!-- Sampel Dataset Awal -->
+    <div class="card mb-4 border-0 shadow-sm">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Sampel Dataset Awal</h4>
+        <button class="btn btn-sm btn-light toggle-btn" onclick="toggleTable('original')" id="originalToggleBtn">Lihat Semua</button>
+      </div>
+      <div class="table-responsive table-wrapper" id="originalTable">
+        {{ original|safe }}
+      </div>
+    </div>
+
+    <!-- Visualisasi Cluster -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="img-card text-center">
+          <h5 class="text-primary">Visualisasi Cluster</h5>
+          <img src="{{ cluster }}" alt="Cluster" class="img-fluid rounded" />
+          <p class="text-muted mt-2 small">Menampilkan pengelompokan pelanggan berdasarkan Total Item dan Total Belanja.</p>
+          <ul class="text-muted small text-start ps-3">
+            <li><strong>Cluster 0</strong>: Pelanggan dengan transaksi rendah, belanja rendah</li>
+            <li><strong>Cluster 1</strong>: Pelanggan dengan jumlah item tinggi dan belanja tinggi</li>
+            <li><strong>Cluster 2</strong>: Pelanggan aktif dengan transaksi sedang</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="img-card text-center">
+          <h5 class="text-primary">Metode Elbow</h5>
+          <img src="{{ elbow }}" alt="Elbow" class="img-fluid rounded" />
+          <p class="text-muted mt-2 small">Grafik ini digunakan untuk menentukan jumlah cluster optimal berdasarkan nilai WCSS (Within-Cluster Sum of Squares).</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="img-card text-center">
+          <h5 class="text-primary">Silhouette Score</h5>
+          <img src="{{ silhouette }}" alt="Silhouette" class="img-fluid rounded" />
+          <p class="text-muted mt-2 small">Silhouette Score mengukur seberapa baik suatu objek cocok dalam cluster-nya dibandingkan dengan cluster lainnya.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabel Hasil Clustering -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Hasil Clustering</h4>
+        <button class="btn btn-sm btn-light toggle-btn" onclick="toggleTable('result')" id="resultToggleBtn">Lihat Semua</button>
+      </div>
+      <div class="table-responsive table-wrapper" id="resultTable">
+        {{ result|safe }}
+      </div>
+    </div>
+
+    <!-- Tombol Kembali -->
+    <div class="text-end mt-4">
+      <a href="/" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>Kembali ke Upload
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let originalExpanded = false;
+    let resultExpanded = false;
+
+    function toggleTable(type) {
+      const tableId = type + 'Table';
+      const btnId = type + 'ToggleBtn';
+      const table = document.getElementById(tableId);
+      const btn = document.getElementById(btnId);
+
+      if ((type === 'original' && originalExpanded) || (type === 'result' && resultExpanded)) {
+        table.style.maxHeight = '350px';
+        table.style.overflowY = 'auto';
+        btn.innerText = 'Lihat Semua';
+        if (type === 'original') originalExpanded = false;
+        else resultExpanded = false;
+      } else {
+        table.style.maxHeight = 'none';
+        table.style.overflowY = 'visible';
+        btn.innerText = 'Sembunyikan';
+        if (type === 'original') originalExpanded = true;
+        else resultExpanded = true;
+      }
+    }
+  </script>
+</body>
+</html>
